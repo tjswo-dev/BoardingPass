@@ -25,7 +25,9 @@ export async function GET() {
   const supabase = createClient(url, key);
   let query = supabase
     .from("allocations")
-    .select("*, products(*), stores(*), influencers(*)")
+    .select(
+      "*, products(*), stores(*), influencers(*), companies(id, name), creator_links(*)",
+    )
     .order("visit_date", { ascending: false })
     .order("created_at", { ascending: false });
 

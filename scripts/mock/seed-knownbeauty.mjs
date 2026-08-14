@@ -10,7 +10,11 @@
 import { createClient } from "@supabase/supabase-js";
 import { randomBytes, scryptSync } from "crypto";
 import { readFileSync } from "fs";
-import { pickRealLink } from "./real-content-links.mjs";
+import { pickPersonLink } from "./real-person-content.mjs";
+import {
+  REAL_BEAUTY_INFLUENCERS,
+  snsUrlFor,
+} from "./real-beauty-influencers.mjs";
 
 const env = Object.fromEntries(
   readFileSync(".env.local", "utf8")
@@ -53,28 +57,7 @@ const PRODUCTS = [
   ["KB-MASK", "KnownBeauty 콜라겐 시트 마스크"],
 ];
 
-const INFLUENCERS = [
-  ["사토 유이", "yui.sato.beauty"],
-  ["다나카 마이", "mai.tanaka.skincare"],
-  ["스즈키 하나", "hana.suzuki.diary"],
-  ["와타나베 리코", "riko.watanabe.glow"],
-  ["이토 사쿠라", "sakura.ito.skin"],
-  ["야마모토 아오이", "aoi.yamamoto.beauty"],
-  ["나카무라 미나", "mina.nakamura.lab"],
-  ["고바야시 에미", "emi.kobayashi.glow"],
-  ["가토 린", "rin.kato.tokyo"],
-  ["요시다 나츠키", "natsuki.yoshida.skin"],
-  ["사사키 미오", "mio.sasaki.beauty"],
-  ["마츠모토 유나", "yuna.matsumoto.diary"],
-  ["이노우에 카에데", "kaede.inoue.skincare"],
-  ["기무라 히나", "hina.kimura.glow"],
-  ["하야시 아야", "aya.hayashi.beauty"],
-  ["시미즈 코토네", "kotone.shimizu.skin"],
-  ["모리 레나", "rena.mori.tokyo"],
-  ["이케다 미유", "miyu.ikeda.beauty"],
-  ["후지타 노아", "noa.fujita.glow"],
-  ["오카다 시오리", "shiori.okada.diary"],
-];
+const INFLUENCERS = REAL_BEAUTY_INFLUENCERS;
 
 function visitYmd(index) {
   // 7/18 ~ 8/13 사이 분산
@@ -182,24 +165,52 @@ async function upsertProducts() {
 }
 
 async function upsertInfluencers() {
+  const { data: seeded, error: seededErr } = await supabase
+    .from("influencers")
+    .select("id, name, instagram_handle, instagram_handle_normalized")
+    .eq("notes", "seed:knownbeauty-jp")
+    .order("created_at", { ascending: true });
+  if (seededErr) fail("influencer seed lookup", seededErr);
+
+  const existingByIndex = seeded || [];
   const out = [];
-  for (const [name, handle] of INFLUENCERS) {
-    const { data: existing, error } = await supabase
+  for (let i = 0; i < INFLUENCERS.length; i += 1) {
+    const [name, handle] = INFLUENCERS[i];
+    const byHandle = await supabase
       .from("influencers")
       .select("id, name, instagram_handle, instagram_handle_normalized")
       .eq("instagram_handle_normalized", handle)
       .maybeSingle();
-    if (error) fail("influencer lookup", error);
-    if (existing?.id) {
-      out.push(existing);
+    if (byHandle.error) fail("influencer lookup", byHandle.error);
+
+    const target = byHandle.data?.id
+      ? byHandle.data
+      : existingByIndex[i] || null;
+
+    if (target?.id) {
+      const { data, error: upd } = await supabase
+        .from("influencers")
+        .update({
+          name,
+          instagram_handle: handle,
+          sns_url: snsUrlFor(handle),
+          notes: "seed:knownbeauty-jp",
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", target.id)
+        .select("id, name, instagram_handle, instagram_handle_normalized")
+        .single();
+      if (upd) fail("influencer update", upd);
+      out.push(data);
       continue;
     }
+
     const { data, error: ins } = await supabase
       .from("influencers")
       .insert({
         name,
         instagram_handle: handle,
-        sns_url: `https://www.instagram.com/${handle}`,
+        sns_url: snsUrlFor(handle),
         notes: "seed:knownbeauty-jp",
       })
       .select("id, name, instagram_handle, instagram_handle_normalized")
@@ -305,7 +316,7 @@ async function insertAllocations(plan, storeId, companyId) {
 }
 
 function linkFor(row, _allocId, variant) {
-  return pickRealLink(row.seq * 10 + variant);
+  return pickPersonLink(row.inf.instagram_handle, variant);
 }
 
 async function insertLinks(allocs) {

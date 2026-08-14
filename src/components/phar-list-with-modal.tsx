@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { AdminAllocationEditForm } from "@/components/admin-allocation-edit";
+import { SubmittedContentButtons } from "@/components/admin-content-links";
 import { PHAR_COUNTER_ROOT_ID } from "@/components/phar-header-actions";
 import {
   ALLOCATION_LINK_LABEL_ADMIN,
@@ -315,6 +316,10 @@ function CounterDetailPanel({
         </p>
       )}
 
+      {allowAdminEdit ? (
+        <SubmittedContentButtons links={item.creator_links} full />
+      ) : null}
+
       {item.visit_code ? (
         <p className="text-base text-[var(--muted)]">
           방문 코드{" "}
@@ -612,6 +617,10 @@ function AllocationDetailRows({
   onToggleEdit: () => void;
   onUpdated: (next: AllocationWithRelations) => void;
 }) {
+  const hasContent = (item.creator_links || []).some(
+    (link) => Boolean(link.url) && link.status !== "rejected",
+  );
+
   return (
     <>
       <tr className="border-b border-[var(--line)] last:border-b-0">
@@ -641,6 +650,15 @@ function AllocationDetailRows({
           {item.picked_up_at ? formatKst(item.picked_up_at) : "—"}
         </td>
         {allowAdminEdit ? (
+          <td className="px-3 py-2.5">
+            {hasContent ? (
+              <SubmittedContentButtons links={item.creator_links} />
+            ) : (
+              <span className="text-xs text-[var(--muted)]">—</span>
+            )}
+          </td>
+        ) : null}
+        {allowAdminEdit ? (
           <td className="px-3 py-2.5 text-right">
             <button
               type="button"
@@ -654,7 +672,7 @@ function AllocationDetailRows({
       </tr>
       {allowAdminEdit && editing ? (
         <tr className="border-b border-[var(--line)] bg-[var(--accent-soft)]/30 last:border-b-0">
-          <td colSpan={7} className="px-3 py-3">
+          <td colSpan={8} className="px-3 py-3">
             {item.status === "pending" ||
             item.status === "visited" ||
             item.status === "ready" ? (
@@ -1581,21 +1599,12 @@ export function PharListWithModal({
               </div>
 
               <div
-                className={`relative min-h-0 ${
+                className={`min-h-0 ${
                   counterTall
                     ? "flex-1"
                     : "max-h-[min(70vh,calc(100vh-14rem))]"
                 }`}
               >
-                {statsPeriod !== "today" ? (
-                  <button
-                    type="button"
-                    className="absolute right-14 top-6 z-20 -translate-y-1/2 rounded-full border border-[var(--line)] bg-white/95 px-3 py-1.5 text-xs font-medium text-[var(--accent)] shadow-sm backdrop-blur-sm hover:bg-[var(--accent-soft)]"
-                    onClick={scrollToTodaySection}
-                  >
-                    오늘로 이동
-                  </button>
-                ) : null}
                 <div
                   ref={listScrollRef}
                   className="h-full overflow-auto rounded-2xl border border-[var(--line)] bg-[var(--surface)] shadow-sm"
@@ -1609,7 +1618,20 @@ export function PharListWithModal({
                         <th className="px-4 py-3.5 font-medium text-right">
                           수량
                         </th>
-                        <th className="px-4 py-3.5 font-medium">상태</th>
+                        <th className="px-4 py-3.5 font-medium">
+                          <span className="flex items-center justify-between gap-2">
+                            상태
+                            {statsPeriod !== "today" ? (
+                              <button
+                                type="button"
+                                className="shrink-0 rounded-full border border-[var(--line)] bg-white px-2.5 py-1 text-[11px] font-medium normal-case tracking-normal text-[var(--accent)] hover:bg-white/80"
+                                onClick={scrollToTodaySection}
+                              >
+                                오늘로 이동
+                              </button>
+                            ) : null}
+                          </span>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -2184,7 +2206,7 @@ export function PharListWithModal({
           onClick={() => setOpenId(null)}
         >
           <div
-            className="owm-drawer-panel flex h-full w-full max-w-2xl flex-col overflow-y-auto border-l border-[var(--line)] bg-[var(--surface)] p-6 shadow-xl"
+            className="owm-drawer-panel flex h-full w-full max-w-5xl flex-col overflow-y-auto border-l border-[var(--line)] bg-[var(--surface)] p-6 shadow-xl sm:p-8"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-5 flex items-start justify-between gap-4">
@@ -2286,7 +2308,7 @@ export function PharListWithModal({
                     </p>
                   ) : (
                     <div className="overflow-x-auto border border-[var(--line)]">
-                      <table className="min-w-[640px] w-full border-collapse text-left text-sm">
+                      <table className="min-w-[860px] w-full border-collapse text-left text-sm">
                         <thead>
                           <tr className="border-b border-[var(--line)] bg-[var(--accent-soft)]/40 text-xs text-[var(--muted)]">
                             <th className="px-3 py-2 font-medium">상품</th>
@@ -2297,6 +2319,9 @@ export function PharListWithModal({
                             <th className="px-3 py-2 font-medium">방문일</th>
                             <th className="px-3 py-2 font-medium">상태</th>
                             <th className="px-3 py-2 font-medium">수령</th>
+                            {allowAdminEdit ? (
+                              <th className="px-3 py-2 font-medium">컨텐츠</th>
+                            ) : null}
                             {allowAdminEdit ? (
                               <th className="px-3 py-2 font-medium text-right">
                                 수정

@@ -121,6 +121,7 @@ export function buildMockContentInsights(
         influencerName: item.influencers?.name || handleOf(item),
         influencerHandle: handleOf(item),
         storeName: item.stores?.name || "—",
+        companyName: item.companies?.name || undefined,
         caption: captionFor(item.products?.name || "상품", seed.id),
         views,
         likes,

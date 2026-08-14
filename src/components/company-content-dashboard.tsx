@@ -202,6 +202,7 @@ export function CompanyContentDashboard({
                           <span className="mt-0.5 block text-xs text-[var(--muted)]">
                             {post.influencerName} · {post.influencerHandle} ·{" "}
                             {CREATOR_PLATFORM_LABEL[post.platform]}
+                            {post.companyName ? ` · ${post.companyName}` : ""}
                           </span>
                         </span>
                         <span className="shrink-0 text-right text-xs tabular-nums text-[var(--muted)]">
@@ -328,6 +329,7 @@ function PostDetail({
       </h3>
       <p className="mt-1 text-sm text-[var(--accent)]">
         {post.influencerName} · {post.influencerHandle}
+        {post.companyName ? ` · ${post.companyName}` : ""}
       </p>
       <p className="mt-2 text-sm text-[var(--muted)]">{post.caption}</p>
       <dl className="mt-5 grid grid-cols-3 gap-2 rounded-2xl bg-[var(--accent-soft)]/50 px-3 py-4 text-center">

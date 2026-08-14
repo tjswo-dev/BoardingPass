@@ -17,6 +17,7 @@ export type ContentPostInsight = {
   influencerName: string;
   influencerHandle: string;
   storeName: string;
+  companyName?: string;
   caption: string;
   views: number;
   likes: number;

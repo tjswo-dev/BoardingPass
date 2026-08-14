@@ -6,6 +6,10 @@ import { AdminCompanyPanel } from "@/components/admin-company-panel";
 import { AdminImportPanel } from "@/components/admin-import-panel";
 import { AdminLinkReview } from "@/components/admin-link-review";
 import { AdminStoreOverview } from "@/components/admin-store-overview";
+import {
+  CompanyContentDashboard,
+  type ContentFocus,
+} from "@/components/company-content-dashboard";
 import { PharListWithModal } from "@/components/phar-list-with-modal";
 import {
   Field,
@@ -13,6 +17,8 @@ import {
   fieldClass,
   primaryBtnClass,
 } from "@/components/ui";
+import { buildMockContentInsights } from "@/lib/content-insights-mock";
+import { type ContentPeriod } from "@/lib/content-insights";
 import { type AllocationWithRelations, type Company, type Store } from "@/lib/types";
 
 export function AdminConsoleLayout({
@@ -30,11 +36,19 @@ export function AdminConsoleLayout({
 }) {
   const [manualOpen, setManualOpen] = useState(false);
   const [selectedStoreId, setSelectedStoreId] = useState<string | null>(null);
+  const [view, setView] = useState<"alloc" | "content">("alloc");
+  const [period, setPeriod] = useState<ContentPeriod>("month");
+  const [contentFocus, setContentFocus] = useState<ContentFocus>(null);
 
   const filteredList = useMemo(() => {
     if (!selectedStoreId) return list;
     return list.filter((item) => item.store_id === selectedStoreId);
   }, [list, selectedStoreId]);
+
+  const insights = useMemo(
+    () => buildMockContentInsights(list, period),
+    [list, period],
+  );
 
   const selectedStoreName = selectedStoreId
     ? storeList.find((s) => s.id === selectedStoreId)?.name ||
@@ -43,11 +57,87 @@ export function AdminConsoleLayout({
     : null;
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
       <Notice error={error} message={message} />
 
-      <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-start">
-        <aside className="flex flex-col gap-4">
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-3">
+        <div
+          className="flex rounded-full border border-[var(--line)] bg-white p-0.5"
+          role="tablist"
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={view === "alloc"}
+            onClick={() => setView("alloc")}
+            className={`rounded-full px-3.5 py-2 text-xs font-semibold ${
+              view === "alloc"
+                ? "bg-[var(--accent)] !text-white"
+                : "text-[var(--muted)]"
+            }`}
+          >
+            배정 현황
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={view === "content"}
+            onClick={() => setView("content")}
+            className={`rounded-full px-3.5 py-2 text-xs font-semibold ${
+              view === "content"
+                ? "bg-[var(--accent)] !text-white"
+                : "text-[var(--muted)]"
+            }`}
+          >
+            콘텐츠
+          </button>
+        </div>
+        {view === "content" ? (
+          <div
+            className="flex rounded-full border border-[var(--line)] bg-white p-0.5"
+            role="group"
+          >
+            <button
+              type="button"
+              aria-pressed={period === "month"}
+              onClick={() => setPeriod("month")}
+              className={`rounded-full px-3.5 py-2 text-xs font-semibold ${
+                period === "month"
+                  ? "bg-[var(--accent)] !text-white"
+                  : "text-[var(--muted)]"
+              }`}
+            >
+              이번달
+            </button>
+            <button
+              type="button"
+              aria-pressed={period === "all"}
+              onClick={() => setPeriod("all")}
+              className={`rounded-full px-3.5 py-2 text-xs font-semibold ${
+                period === "all"
+                  ? "bg-[var(--accent)] !text-white"
+                  : "text-[var(--muted)]"
+              }`}
+            >
+              전체
+            </button>
+          </div>
+        ) : null}
+      </div>
+
+      {view === "content" ? (
+        <CompanyContentDashboard
+          snapshot={insights}
+          focus={contentFocus}
+          onFocus={setContentFocus}
+          onOpenAllocation={() => {
+            setView("alloc");
+            setContentFocus(null);
+          }}
+        />
+      ) : (
+      <div className="grid min-h-0 flex-1 gap-4 overflow-hidden lg:grid-cols-[320px_minmax(0,1fr)]">
+        <aside className="flex min-h-0 flex-col gap-4 overflow-y-auto pr-1">
           <AdminStoreOverview
             storeList={storeList}
             list={list}
@@ -182,7 +272,7 @@ export function AdminConsoleLayout({
           </section>
         </aside>
 
-        <section className="flex min-h-[min(70vh,calc(100dvh-12rem))] min-w-0 flex-col lg:sticky lg:top-4 lg:h-[calc(100dvh-6.5rem)] lg:min-h-0">
+        <section className="flex min-h-0 min-w-0 flex-col">
           <div className="mb-3 flex shrink-0 flex-wrap items-end justify-between gap-2">
             <div>
               <h2
@@ -210,6 +300,7 @@ export function AdminConsoleLayout({
           </div>
         </section>
       </div>
+      )}
     </div>
   );
 }

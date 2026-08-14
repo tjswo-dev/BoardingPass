@@ -1,0 +1,560 @@
+{
+  "yukos0520": {
+    "name": "ゆうこす",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=W4ZCEWhSPWA",
+        "platform": "youtube",
+        "author": "ゆうこすモテちゃんねる",
+        "title": "【モテ】これ使っとけば間違いなし♡！自己肯定感爆上げコスメ,スキンケア,ヘアケア...大量紹介！！！",
+        "thumb": "https://i.ytimg.com/vi/W4ZCEWhSPWA/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=HNSsCI9tcdQ",
+        "platform": "youtube",
+        "author": "ゆうこすモテちゃんねる",
+        "title": "【-30kg】1年かけて産後ダイエット成功😭!!やって良かったこと5つ紹介します...💪!!【健康】",
+        "thumb": "https://i.ytimg.com/vi/HNSsCI9tcdQ/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=W4ZCEWhSPWA",
+      "platform": "youtube",
+      "author": "ゆうこすモテちゃんねる",
+      "title": "【モテ】これ使っとけば間違いなし♡！自己肯定感爆上げコスメ,スキンケア,ヘアケア...大量紹介！！！",
+      "thumb": "https://i.ytimg.com/vi/W4ZCEWhSPWA/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=HNSsCI9tcdQ",
+      "platform": "youtube",
+      "author": "ゆうこすモテちゃんねる",
+      "title": "【-30kg】1年かけて産後ダイエット成功😭!!やって良かったこと5つ紹介します...💪!!【健康】",
+      "thumb": "https://i.ytimg.com/vi/HNSsCI9tcdQ/hqdefault.jpg"
+    }
+  },
+  "2525nicole2": {
+    "name": "藤田ニコル",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=jcBVbrHTOEQ",
+        "platform": "youtube",
+        "author": "藤田ニコル⭐️NICOLE FUJITA",
+        "title": "【毎日メイク】2023年春夏の最新にこるん💐💗✨",
+        "thumb": "https://i.ytimg.com/vi/jcBVbrHTOEQ/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=nkuisqXn7y8",
+        "platform": "youtube",
+        "author": "藤田ニコル⭐️NICOLE FUJITA",
+        "title": "【ワンオペの夜🌙】新米ママの悩み聞いて欲しい🥹🎀",
+        "thumb": "https://i.ytimg.com/vi/nkuisqXn7y8/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=jcBVbrHTOEQ",
+      "platform": "youtube",
+      "author": "藤田ニコル⭐️NICOLE FUJITA",
+      "title": "【毎日メイク】2023年春夏の最新にこるん💐💗✨",
+      "thumb": "https://i.ytimg.com/vi/jcBVbrHTOEQ/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=nkuisqXn7y8",
+      "platform": "youtube",
+      "author": "藤田ニコル⭐️NICOLE FUJITA",
+      "title": "【ワンオペの夜🌙】新米ママの悩み聞いて欲しい🥹🎀",
+      "thumb": "https://i.ytimg.com/vi/nkuisqXn7y8/hqdefault.jpg"
+    }
+  },
+  "tsubasamasuwaka1013": {
+    "name": "益若つばさ",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=Uh6lmIBhGXg",
+        "platform": "youtube",
+        "author": "益若つばさTsubasaMasuwaka",
+        "title": "益若つばさの地雷メイク🖤量産型との違いを考えてみたよ😚Japanese Trends Makeup",
+        "thumb": "https://i.ytimg.com/vi/Uh6lmIBhGXg/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=Uh6lmIBhGXg",
+      "platform": "youtube",
+      "author": "益若つばさTsubasaMasuwaka",
+      "title": "益若つばさの地雷メイク🖤量産型との違いを考えてみたよ😚Japanese Trends Makeup",
+      "thumb": "https://i.ytimg.com/vi/Uh6lmIBhGXg/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=Uh6lmIBhGXg",
+      "platform": "youtube",
+      "author": "益若つばさTsubasaMasuwaka",
+      "title": "益若つばさの地雷メイク🖤量産型との違いを考えてみたよ😚Japanese Trends Makeup",
+      "thumb": "https://i.ytimg.com/vi/Uh6lmIBhGXg/hqdefault.jpg"
+    }
+  },
+  "mayukokawakitaofficial": {
+    "name": "河北麻友子",
+    "videos": [],
+    "primary": {
+      "url": "https://www.instagram.com/mayukokawakitaofficial/",
+      "platform": "instagram",
+      "author": "河北麻友子",
+      "title": "河北麻友子 Instagram",
+      "thumb": null
+    },
+    "secondary": {
+      "url": "https://www.instagram.com/mayukokawakitaofficial/",
+      "platform": "instagram",
+      "author": "河北麻友子",
+      "title": "河北麻友子 Instagram",
+      "thumb": null
+    }
+  },
+  "i_am_kiko": {
+    "name": "水原希子",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=TdK7CiBpGco",
+        "platform": "youtube",
+        "author": "VOGUE JAPAN",
+        "title": "水原希子とアイリス・ロウの、東京お忍びディナーを覗き見。| A Dinner with | VOGUE JAPAN",
+        "thumb": "https://i.ytimg.com/vi/TdK7CiBpGco/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=uPCMoIHpOqs",
+        "platform": "youtube",
+        "author": "VOGUE JAPAN",
+        "title": "水原希子のハイセンスな1週間コーディネート。ギャルマインドについての持論も必見！| 7 Days, 7 Looks | VOGUE JAPAN",
+        "thumb": "https://i.ytimg.com/vi/uPCMoIHpOqs/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=TdK7CiBpGco",
+      "platform": "youtube",
+      "author": "VOGUE JAPAN",
+      "title": "水原希子とアイリス・ロウの、東京お忍びディナーを覗き見。| A Dinner with | VOGUE JAPAN",
+      "thumb": "https://i.ytimg.com/vi/TdK7CiBpGco/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=uPCMoIHpOqs",
+      "platform": "youtube",
+      "author": "VOGUE JAPAN",
+      "title": "水原希子のハイセンスな1週間コーディネート。ギャルマインドについての持論も必見！| 7 Days, 7 Looks | VOGUE JAPAN",
+      "thumb": "https://i.ytimg.com/vi/uPCMoIHpOqs/hqdefault.jpg"
+    }
+  },
+  "345insta": {
+    "name": "指原莉乃",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=CbFksl3R13c",
+        "platform": "youtube",
+        "author": "さしはらちゃんねる",
+        "title": "パリを堪能しました！（時々ノイミー）",
+        "thumb": "https://i.ytimg.com/vi/CbFksl3R13c/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=OmELSXdk4Bk",
+        "platform": "youtube",
+        "author": "さしはらちゃんねる",
+        "title": "急に韓国行っちゃう勢です！",
+        "thumb": "https://i.ytimg.com/vi/OmELSXdk4Bk/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=CbFksl3R13c",
+      "platform": "youtube",
+      "author": "さしはらちゃんねる",
+      "title": "パリを堪能しました！（時々ノイミー）",
+      "thumb": "https://i.ytimg.com/vi/CbFksl3R13c/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=OmELSXdk4Bk",
+      "platform": "youtube",
+      "author": "さしはらちゃんねる",
+      "title": "急に韓国行っちゃう勢です！",
+      "thumb": "https://i.ytimg.com/vi/OmELSXdk4Bk/hqdefault.jpg"
+    }
+  },
+  "watanabenaomi703": {
+    "name": "渡辺直美",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=XY23fVyh4Y4",
+        "platform": "youtube",
+        "author": "NAOMI CLUB",
+        "title": "【新居生配信】沢山喋ったね大会in NYC 東京ドームと北米ツアーとQ/A",
+        "thumb": "https://i.ytimg.com/vi/XY23fVyh4Y4/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=52i0u-dtGlQ",
+        "platform": "youtube",
+        "author": "naomiclub",
+        "title": "Terezička papá hamánka",
+        "thumb": "https://i.ytimg.com/vi/52i0u-dtGlQ/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=XY23fVyh4Y4",
+      "platform": "youtube",
+      "author": "NAOMI CLUB",
+      "title": "【新居生配信】沢山喋ったね大会in NYC 東京ドームと北米ツアーとQ/A",
+      "thumb": "https://i.ytimg.com/vi/XY23fVyh4Y4/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=52i0u-dtGlQ",
+      "platform": "youtube",
+      "author": "naomiclub",
+      "title": "Terezička papá hamánka",
+      "thumb": "https://i.ytimg.com/vi/52i0u-dtGlQ/hqdefault.jpg"
+    }
+  },
+  "kannahashimoto.mg": {
+    "name": "橋本環奈",
+    "videos": [],
+    "primary": {
+      "url": "https://www.instagram.com/kannahashimoto.mg/",
+      "platform": "instagram",
+      "author": "橋本環奈",
+      "title": "橋本環奈 Instagram",
+      "thumb": null
+    },
+    "secondary": {
+      "url": "https://www.instagram.com/kannahashimoto.mg/",
+      "platform": "instagram",
+      "author": "橋本環奈",
+      "title": "橋本環奈 Instagram",
+      "thumb": null
+    }
+  },
+  "imada_mio": {
+    "name": "今田美桜",
+    "videos": [],
+    "primary": {
+      "url": "https://www.instagram.com/imada_mio/",
+      "platform": "instagram",
+      "author": "今田美桜",
+      "title": "今田美桜 Instagram",
+      "thumb": null
+    },
+    "secondary": {
+      "url": "https://www.instagram.com/imada_mio/",
+      "platform": "instagram",
+      "author": "今田美桜",
+      "title": "今田美桜 Instagram",
+      "thumb": null
+    }
+  },
+  "_yoshida_akari": {
+    "name": "吉田朱里",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=eZl6G6w01l8",
+        "platform": "youtube",
+        "author": "Yoshida Akari ",
+        "title": "cara membuat bakwan 100% no root",
+        "thumb": "https://i.ytimg.com/vi/eZl6G6w01l8/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=eZl6G6w01l8",
+      "platform": "youtube",
+      "author": "Yoshida Akari ",
+      "title": "cara membuat bakwan 100% no root",
+      "thumb": "https://i.ytimg.com/vi/eZl6G6w01l8/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=eZl6G6w01l8",
+      "platform": "youtube",
+      "author": "Yoshida Akari ",
+      "title": "cara membuat bakwan 100% no root",
+      "thumb": "https://i.ytimg.com/vi/eZl6G6w01l8/hqdefault.jpg"
+    }
+  },
+  "risa_doll_": {
+    "name": "中村里砂",
+    "videos": [],
+    "primary": {
+      "url": "https://www.instagram.com/risa_doll_/",
+      "platform": "instagram",
+      "author": "中村里砂",
+      "title": "中村里砂 Instagram",
+      "thumb": null
+    },
+    "secondary": {
+      "url": "https://www.instagram.com/risa_doll_/",
+      "platform": "instagram",
+      "author": "中村里砂",
+      "title": "中村里砂 Instagram",
+      "thumb": null
+    }
+  },
+  "airisuzuki_official_uf": {
+    "name": "鈴木愛理",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=kdnnCQJIdUA",
+        "platform": "youtube",
+        "author": "鈴木愛理",
+        "title": "【LIVE映像】鈴木愛理 - “白炎檀”(From 鈴木愛理 LIVE 2026 llBias by usll)",
+        "thumb": "https://i.ytimg.com/vi/kdnnCQJIdUA/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=do8qTPlchVo",
+        "platform": "youtube",
+        "author": "鈴木愛理",
+        "title": "【LIVE映像】鈴木愛理 - “硝子のプリマドンナ”(From 鈴木愛理 LIVE 2026 ll:Bias by us:ll)",
+        "thumb": "https://i.ytimg.com/vi/do8qTPlchVo/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=kdnnCQJIdUA",
+      "platform": "youtube",
+      "author": "鈴木愛理",
+      "title": "【LIVE映像】鈴木愛理 - “白炎檀”(From 鈴木愛理 LIVE 2026 llBias by usll)",
+      "thumb": "https://i.ytimg.com/vi/kdnnCQJIdUA/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=do8qTPlchVo",
+      "platform": "youtube",
+      "author": "鈴木愛理",
+      "title": "【LIVE映像】鈴木愛理 - “硝子のプリマドンナ”(From 鈴木愛理 LIVE 2026 ll:Bias by us:ll)",
+      "thumb": "https://i.ytimg.com/vi/do8qTPlchVo/hqdefault.jpg"
+    }
+  },
+  "sekine.risa": {
+    "name": "関根りさ",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=dzEL7aAzzOk",
+        "platform": "youtube",
+        "author": "SekineRisa",
+        "title": "5000万円かけてリノベした我が家、大公開🔥",
+        "thumb": "https://i.ytimg.com/vi/dzEL7aAzzOk/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Vuk5R72g5_w",
+        "platform": "youtube",
+        "author": "SekineRisa",
+        "title": "特に誰に見せるわけでも出かけるわけでもない毎日メイク",
+        "thumb": "https://i.ytimg.com/vi/Vuk5R72g5_w/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=dzEL7aAzzOk",
+      "platform": "youtube",
+      "author": "SekineRisa",
+      "title": "5000万円かけてリノベした我が家、大公開🔥",
+      "thumb": "https://i.ytimg.com/vi/dzEL7aAzzOk/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=Vuk5R72g5_w",
+      "platform": "youtube",
+      "author": "SekineRisa",
+      "title": "特に誰に見せるわけでも出かけるわけでもない毎日メイク",
+      "thumb": "https://i.ytimg.com/vi/Vuk5R72g5_w/hqdefault.jpg"
+    }
+  },
+  "rei_maruyama": {
+    "name": "丸山礼",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=lPRxynRzwf4",
+        "platform": "youtube",
+        "author": "丸山礼チャンネル",
+        "title": "丸山礼廊下焼肉 #丸山礼 #shorts #おすすめ",
+        "thumb": "https://i.ytimg.com/vi/lPRxynRzwf4/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=lPRxynRzwf4",
+      "platform": "youtube",
+      "author": "丸山礼チャンネル",
+      "title": "丸山礼廊下焼肉 #丸山礼 #shorts #おすすめ",
+      "thumb": "https://i.ytimg.com/vi/lPRxynRzwf4/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=lPRxynRzwf4",
+      "platform": "youtube",
+      "author": "丸山礼チャンネル",
+      "title": "丸山礼廊下焼肉 #丸山礼 #shorts #おすすめ",
+      "thumb": "https://i.ytimg.com/vi/lPRxynRzwf4/hqdefault.jpg"
+    }
+  },
+  "michopa1030": {
+    "name": "みちょぱ",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=09xmPgqO8ks",
+        "platform": "youtube",
+        "author": "みちょぱ吉村のマブマブTV",
+        "title": "みちょぱ、吉村に今後に関わるドッキリを仕掛ける",
+        "thumb": "https://i.ytimg.com/vi/09xmPgqO8ks/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=9Id4rtZJD5s",
+        "platform": "youtube",
+        "author": "みちょぱ吉村のマブマブTV",
+        "title": "【爆買い】みちょぱに出産お祝い！！実は吉村崇も報告！！",
+        "thumb": "https://i.ytimg.com/vi/9Id4rtZJD5s/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=09xmPgqO8ks",
+      "platform": "youtube",
+      "author": "みちょぱ吉村のマブマブTV",
+      "title": "みちょぱ、吉村に今後に関わるドッキリを仕掛ける",
+      "thumb": "https://i.ytimg.com/vi/09xmPgqO8ks/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=9Id4rtZJD5s",
+      "platform": "youtube",
+      "author": "みちょぱ吉村のマブマブTV",
+      "title": "【爆買い】みちょぱに出産お祝い！！実は吉村崇も報告！！",
+      "thumb": "https://i.ytimg.com/vi/9Id4rtZJD5s/hqdefault.jpg"
+    }
+  },
+  "enakorin": {
+    "name": "えなこ",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=Jwn7o_Lrhs4",
+        "platform": "youtube",
+        "author": "えなこ",
+        "title": "今年の夏は...デニム水着！",
+        "thumb": "https://i.ytimg.com/vi/Jwn7o_Lrhs4/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=YNzCBJNpqoE",
+        "platform": "youtube",
+        "author": "えなこ",
+        "title": "【鳴潮】千咲と過ごす夏",
+        "thumb": "https://i.ytimg.com/vi/YNzCBJNpqoE/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=Jwn7o_Lrhs4",
+      "platform": "youtube",
+      "author": "えなこ",
+      "title": "今年の夏は...デニム水着！",
+      "thumb": "https://i.ytimg.com/vi/Jwn7o_Lrhs4/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=YNzCBJNpqoE",
+      "platform": "youtube",
+      "author": "えなこ",
+      "title": "【鳴潮】千咲と過ごす夏",
+      "thumb": "https://i.ytimg.com/vi/YNzCBJNpqoE/hqdefault.jpg"
+    }
+  },
+  "nozomisasaki_official": {
+    "name": "佐々木希",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=-2h7dTFmvEo",
+        "platform": "youtube",
+        "author": "佐々木 希 (仮)",
+        "title": "LA旅行に向けた我が家のパッキングとバッグの中身✈️",
+        "thumb": "https://i.ytimg.com/vi/-2h7dTFmvEo/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=-2h7dTFmvEo",
+      "platform": "youtube",
+      "author": "佐々木 希 (仮)",
+      "title": "LA旅行に向けた我が家のパッキングとバッグの中身✈️",
+      "thumb": "https://i.ytimg.com/vi/-2h7dTFmvEo/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=-2h7dTFmvEo",
+      "platform": "youtube",
+      "author": "佐々木 希 (仮)",
+      "title": "LA旅行に向けた我が家のパッキングとバッグの中身✈️",
+      "thumb": "https://i.ytimg.com/vi/-2h7dTFmvEo/hqdefault.jpg"
+    }
+  },
+  "cocomi_553_official": {
+    "name": "Cocomi",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=GA9se70YI8s",
+        "platform": "youtube",
+        "author": "ここみちゃんネル",
+        "title": "2025年 最新情報 異常な事態 実質賃下げ",
+        "thumb": "https://i.ytimg.com/vi/GA9se70YI8s/hqdefault.jpg"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=cGFqRlXrKUg",
+        "platform": "youtube",
+        "author": "ここみちゃんネル",
+        "title": "2025年 重要情報 第3時おやつ大会 与那国",
+        "thumb": "https://i.ytimg.com/vi/cGFqRlXrKUg/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=GA9se70YI8s",
+      "platform": "youtube",
+      "author": "ここみちゃんネル",
+      "title": "2025年 最新情報 異常な事態 実質賃下げ",
+      "thumb": "https://i.ytimg.com/vi/GA9se70YI8s/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=cGFqRlXrKUg",
+      "platform": "youtube",
+      "author": "ここみちゃんネル",
+      "title": "2025年 重要情報 第3時おやつ大会 与那国",
+      "thumb": "https://i.ytimg.com/vi/cGFqRlXrKUg/hqdefault.jpg"
+    }
+  },
+  "yuuuuukko_": {
+    "name": "新木優子",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=1GSq0Ea6MiI",
+        "platform": "youtube",
+        "author": "Yuko Araki",
+        "title": "Easter parade",
+        "thumb": "https://i.ytimg.com/vi/1GSq0Ea6MiI/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=1GSq0Ea6MiI",
+      "platform": "youtube",
+      "author": "Yuko Araki",
+      "title": "Easter parade",
+      "thumb": "https://i.ytimg.com/vi/1GSq0Ea6MiI/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=1GSq0Ea6MiI",
+      "platform": "youtube",
+      "author": "Yuko Araki",
+      "title": "Easter parade",
+      "thumb": "https://i.ytimg.com/vi/1GSq0Ea6MiI/hqdefault.jpg"
+    }
+  },
+  "fuwa876": {
+    "name": "フワちゃん",
+    "videos": [
+      {
+        "url": "https://www.youtube.com/watch?v=lAMLzKbGmgw",
+        "platform": "youtube",
+        "author": "フワちゃんTV /FUWACHAN TV",
+        "title": "正直、筋トレって全然楽しくなくないですか？？？",
+        "thumb": "https://i.ytimg.com/vi/lAMLzKbGmgw/hqdefault.jpg"
+      }
+    ],
+    "primary": {
+      "url": "https://www.youtube.com/watch?v=lAMLzKbGmgw",
+      "platform": "youtube",
+      "author": "フワちゃんTV /FUWACHAN TV",
+      "title": "正直、筋トレって全然楽しくなくないですか？？？",
+      "thumb": "https://i.ytimg.com/vi/lAMLzKbGmgw/hqdefault.jpg"
+    },
+    "secondary": {
+      "url": "https://www.youtube.com/watch?v=lAMLzKbGmgw",
+      "platform": "youtube",
+      "author": "フワちゃんTV /FUWACHAN TV",
+      "title": "正直、筋トレって全然楽しくなくないですか？？？",
+      "thumb": "https://i.ytimg.com/vi/lAMLzKbGmgw/hqdefault.jpg"
+    }
+  }
+}

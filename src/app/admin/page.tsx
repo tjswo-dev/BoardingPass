@@ -31,7 +31,7 @@ export default async function AdminPage({
       supabase
         .from("allocations")
         .select(
-          "*, products(*), stores(*), influencers(*), companies(id, name), creator_links(id, status)",
+          "*, products(*), stores(*), influencers(*), companies(id, name), creator_links(*)",
         )
         .order("visit_date", { ascending: false })
         .order("created_at", { ascending: false }),
@@ -44,7 +44,7 @@ export default async function AdminPage({
   return (
     <AppShell
       full
-      compactHeader
+      fitViewport
       theme="owm"
       eyebrow="Admin"
       title="운영 콘솔"

@@ -12,6 +12,8 @@ import {
   summarizeAllocationLinks,
   type AllocationLinkSummary,
 } from "@/lib/creator-link";
+import { demoAvatarUrl } from "@/lib/demo-avatars";
+import { pickContentCoverUrl } from "@/lib/content-thumbnail";
 import {
   allocationStatusDisplayLabel,
   type AllocationWithRelations,
@@ -101,6 +103,141 @@ function linkChipClass(sum: AllocationLinkSummary) {
   if (sum === "reviewing") return "bg-[#f8ecd8] text-[#8a4b12]";
   if (sum === "rejected") return "bg-[#f8e4e4] text-[#9b2c2c]";
   return "bg-[#f0ece6] text-[#8a8074]";
+}
+
+function handleRaw(item: AllocationWithRelations) {
+  return (
+    item.influencers?.instagram_handle_normalized ||
+    item.influencers?.instagram_handle ||
+    ""
+  )
+    .replace(/^@+/, "")
+    .trim();
+}
+
+function fallbackAvatarUrl(handle: string, name: string) {
+  const seed = encodeURIComponent(handle || name || "creator");
+  return `https://api.dicebear.com/9.x/notionists/svg?seed=${seed}&backgroundColor=d4ebe1,e8eef0,f5ede3`;
+}
+
+/** 공개 초상(Wikimedia) → 없으면 Dicebear. */
+function profileAvatarUrl(handle: string, name: string) {
+  return demoAvatarUrl(handle) || fallbackAvatarUrl(handle, name);
+}
+
+function InfluencerAvatar({
+  src,
+  fallbackSrc,
+  className,
+  alt = "",
+}: {
+  src: string;
+  fallbackSrc: string;
+  className?: string;
+  alt?: string;
+}) {
+  const [current, setCurrent] = useState(src);
+  useEffect(() => {
+    setCurrent(src);
+  }, [src]);
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={current}
+      alt={alt}
+      className={className}
+      loading="lazy"
+      draggable={false}
+      referrerPolicy="no-referrer"
+      onError={() => {
+        if (current !== fallbackSrc) setCurrent(fallbackSrc);
+      }}
+    />
+  );
+}
+
+type InfluencerBoardCard = {
+  influencerId: string;
+  name: string;
+  handle: string;
+  coverUrl: string | null;
+  coverFallback: string;
+  stores: string[];
+  products: string[];
+  latestVisit: string;
+  hasToday: boolean;
+  allocCount: number;
+  primary: AllocationWithRelations;
+  linkSum: AllocationLinkSummary;
+  statusLabel: string;
+  statusClass: string;
+};
+
+function buildInfluencerCards(
+  items: AllocationWithRelations[],
+  today: string,
+): InfluencerBoardCard[] {
+  const map = new Map<string, AllocationWithRelations[]>();
+  for (const item of items) {
+    const key = item.influencer_id || item.id;
+    const list = map.get(key) || [];
+    list.push(item);
+    map.set(key, list);
+  }
+
+  const cards: InfluencerBoardCard[] = [];
+  for (const [influencerId, rows] of map) {
+    const sorted = [...rows].sort((a, b) => {
+      const da = visitKey(a);
+      const db = visitKey(b);
+      if (da !== db) return db.localeCompare(da);
+      return statusRank(a) - statusRank(b);
+    });
+    const primary = sorted[0];
+    const handle = handleRaw(primary);
+    const name = (primary.influencers?.name || "").trim() || handle || "인플루언서";
+    const stores = [
+      ...new Set(
+        sorted.map((r) => r.stores?.name || "").filter(Boolean) as string[],
+      ),
+    ];
+    const products = [
+      ...new Set(
+        sorted.map((r) => r.products?.name || "").filter(Boolean) as string[],
+      ),
+    ];
+    const visits = sorted.map(visitKey).filter(Boolean);
+    const latestVisit = visits[0] || "";
+    const hasToday = visits.includes(today);
+    const allLinks = sorted.flatMap((r) => r.creator_links || []);
+    const linkSum = summarizeAllocationLinks(allLinks);
+    const best =
+      sorted.find((r) => r.status === "picked_up") ||
+      sorted.find((r) => r.status === "visited" || r.status === "ready") ||
+      primary;
+
+    cards.push({
+      influencerId,
+      name,
+      handle: handle ? `@${handle}` : "—",
+      coverUrl: pickContentCoverUrl(allLinks, handle) || demoAvatarUrl(handle),
+      coverFallback: fallbackAvatarUrl(handle, name),
+      stores,
+      products,
+      latestVisit,
+      hasToday,
+      allocCount: sorted.length,
+      primary,
+      linkSum,
+      statusLabel: statusChipLabel(best),
+      statusClass: statusChipClass(best),
+    });
+  }
+
+  return cards.sort((a, b) => {
+    if (a.hasToday !== b.hasToday) return a.hasToday ? -1 : 1;
+    return b.latestVisit.localeCompare(a.latestVisit);
+  });
 }
 
 export function CompanyConsole({
@@ -199,6 +336,11 @@ export function CompanyConsole({
   const related = selected
     ? items.filter((i) => i.influencer_id === selected.influencer_id)
     : [];
+
+  const boardCards = useMemo(
+    () => buildInfluencerCards(filtered, today),
+    [filtered, today],
+  );
 
   const counterActive = {
     all: status === "" && linkFilter === "all",
@@ -407,84 +549,111 @@ export function CompanyConsole({
         </button>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-auto rounded-2xl border border-[var(--line)] bg-[var(--surface)]">
-        {filtered.length === 0 ? (
+      <div className="min-h-0 flex-1 overflow-auto rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-3 sm:p-4">
+        {boardCards.length === 0 ? (
           <p className="px-4 py-10 text-center text-sm text-[var(--muted)]">
             조건에 맞는 배정이 없습니다.
           </p>
         ) : (
-          <table className="min-w-[860px] w-full border-collapse text-left text-sm">
-            <thead className="sticky top-0 z-10">
-              <tr className="border-b border-[var(--line)] bg-[var(--accent-soft)] text-xs text-[var(--muted)]">
-                <th className="px-4 py-3 font-medium">방문 예정일</th>
-                <th className="px-4 py-3 font-medium">인플루언서</th>
-                <th className="px-4 py-3 font-medium">매장</th>
-                <th className="px-4 py-3 font-medium">상품 / 수량</th>
-                <th className="px-4 py-3 font-medium">진행 상태</th>
-                <th className="px-4 py-3 font-medium">링크</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((item) => {
-                const date = visitKey(item);
-                const linkSum = summarizeAllocationLinks(
-                  item.creator_links || [],
-                );
-                return (
-                  <tr
-                    key={item.id}
-                    className={`cursor-pointer border-b border-[var(--line)] last:border-b-0 ${
-                      item.id === openId
-                        ? "bg-[var(--accent-soft)]"
-                        : "hover:bg-[var(--accent-soft)]/40"
-                    }`}
-                    onClick={() =>
-                      setOpenId((id) => (id === item.id ? null : item.id))
-                    }
-                  >
-                    <td className="px-4 py-3">
-                      <span className="font-medium">
-                        {formatVisitLabel(date)}
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+            {boardCards.map((card) => {
+              const selectedActive =
+                selected?.influencer_id === card.influencerId;
+              return (
+                <button
+                  key={card.influencerId}
+                  type="button"
+                  onClick={() =>
+                    setOpenId((id) =>
+                      id === card.primary.id ? null : card.primary.id,
+                    )
+                  }
+                  className={`flex flex-col overflow-hidden rounded-2xl border text-left transition ${
+                    selectedActive
+                      ? "border-[var(--accent)] bg-[var(--accent-soft)]/50 shadow-sm"
+                      : "border-[var(--line)] bg-white hover:border-[var(--accent)]/45 hover:bg-[var(--accent-soft)]/25"
+                  }`}
+                >
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-[var(--accent-soft)]">
+                    {card.coverUrl ? (
+                      <InfluencerAvatar
+                        src={card.coverUrl}
+                        fallbackSrc={card.coverFallback}
+                        alt=""
+                        className="h-full w-full object-cover object-center"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full flex-col items-center justify-center gap-1 bg-gradient-to-br from-[var(--accent-soft)] to-[#dfe8e3] px-4 text-center">
+                        <p className="text-sm font-medium text-[var(--ink)]">
+                          {card.name}
+                        </p>
+                        <p className="text-xs text-[var(--muted)]">
+                          제출 콘텐츠 없음
+                        </p>
+                      </div>
+                    )}
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0b1712]/75 to-transparent px-2.5 pb-2 pt-8">
+                      <p className="truncate text-sm font-semibold text-white">
+                        {card.name}
+                      </p>
+                      <p className="truncate text-[11px] text-white/85">
+                        {card.handle}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-2 px-3 py-2.5">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${card.statusClass}`}
+                      >
+                        {card.statusLabel}
                       </span>
-                      {date === today ? (
-                        <span className="ml-2 text-[11px] font-semibold text-[var(--accent)]">
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${linkChipClass(card.linkSum)}`}
+                      >
+                        {ALLOCATION_LINK_LABEL[card.linkSum]}
+                      </span>
+                      {card.hasToday ? (
+                        <span className="rounded-full bg-[var(--accent)] px-2 py-0.5 text-[11px] font-semibold !text-white">
                           오늘
                         </span>
                       ) : null}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className="block font-semibold">
-                        {item.influencers?.name || "—"}
-                      </span>
-                      <span className="text-[var(--accent)]">
-                        {formatHandle(item)}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-[var(--muted)]">
-                      {item.stores?.name || "—"}
-                    </td>
-                    <td className="px-4 py-3">
-                      {item.products?.name || "상품"} · {item.quantity}개
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${statusChipClass(item)}`}
-                      >
-                        {statusChipLabel(item)}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${linkChipClass(linkSum)}`}
-                      >
-                        {ALLOCATION_LINK_LABEL[linkSum]}
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                    </div>
+                    <dl className="space-y-1 text-[11px] text-[var(--muted)]">
+                      <div className="flex gap-2">
+                        <dt className="w-10 shrink-0">매장</dt>
+                        <dd className="min-w-0 font-medium text-[var(--ink)]">
+                          {card.stores.length > 0
+                            ? card.stores.join(" · ")
+                            : "—"}
+                        </dd>
+                      </div>
+                      <div className="flex gap-2">
+                        <dt className="w-10 shrink-0">방문</dt>
+                        <dd className="font-medium text-[var(--ink)]">
+                          {formatVisitLabel(card.latestVisit)}
+                          {card.allocCount > 1
+                            ? ` · 배정 ${card.allocCount}건`
+                            : ""}
+                        </dd>
+                      </div>
+                      <div className="flex gap-2">
+                        <dt className="w-10 shrink-0">상품</dt>
+                        <dd className="min-w-0 truncate font-medium text-[var(--ink)]">
+                          {card.products.length > 0
+                            ? card.products.slice(0, 2).join(" · ")
+                            : "—"}
+                          {card.products.length > 2
+                            ? ` 외 ${card.products.length - 2}`
+                            : ""}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         )}
       </div>
 
@@ -509,10 +678,10 @@ export function CompanyConsole({
           ) : (
             <div className="flex h-full min-h-[240px] flex-col items-center justify-center text-center">
               <p className="text-base font-medium text-[var(--ink)]">
-                행을 선택하면 상세가 여기에 표시됩니다
+                카드를 선택하면 상세가 여기에 표시됩니다
               </p>
               <p className="mt-2 text-sm leading-5 text-[var(--muted)]">
-                목록에서 인플루언서를 선택하세요
+                보드에서 인플루언서를 선택하세요
               </p>
             </div>
           )}
@@ -549,32 +718,44 @@ function CompanyInfPanel({
     setRelatedOpen(false);
   }, [item.influencer_id]);
   const handle = formatHandle(item);
+  const handleKey = handleRaw(item);
+  const name = (item.influencers?.name || "").trim() || handleKey || "인플루언서";
   const sns = snsUrl(item.influencers?.sns_url);
   const links = (item.creator_links || []) as CreatorLink[];
   const linkSum = summarizeAllocationLinks(links);
+  const avatarUrl = profileAvatarUrl(handleKey, name);
+  const avatarFallback = fallbackAvatarUrl(handleKey, name);
 
   return (
     <div>
         <div className="mb-5 flex items-start justify-between gap-3">
-          <div>
-            <p className="text-xs tracking-[0.18em] text-[var(--muted)] uppercase">
-              Influencer
-            </p>
-            <h3 className="mt-1 text-2xl font-bold text-[var(--ink)]">
-              {item.influencers?.name || handle}
-            </h3>
-            <p className="mt-1 text-[var(--accent)]">{handle}</p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              <span
-                className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusChipClass(item)}`}
-              >
-                {statusChipLabel(item)}
-              </span>
-              <span
-                className={`rounded-full px-2 py-0.5 text-xs font-medium ${linkChipClass(linkSum)}`}
-              >
-                {ALLOCATION_LINK_LABEL[linkSum]}
-              </span>
+          <div className="flex min-w-0 flex-1 items-start gap-3">
+            <InfluencerAvatar
+              src={avatarUrl}
+              fallbackSrc={avatarFallback}
+              alt={name}
+              className="h-14 w-14 shrink-0 rounded-full object-cover ring-1 ring-[var(--line)]"
+            />
+            <div className="min-w-0">
+              <p className="text-xs tracking-[0.18em] text-[var(--muted)] uppercase">
+                Influencer
+              </p>
+              <h3 className="mt-1 text-2xl font-bold text-[var(--ink)]">
+                {item.influencers?.name || handle}
+              </h3>
+              <p className="mt-1 text-[var(--accent)]">{handle}</p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                <span
+                  className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusChipClass(item)}`}
+                >
+                  {statusChipLabel(item)}
+                </span>
+                <span
+                  className={`rounded-full px-2 py-0.5 text-xs font-medium ${linkChipClass(linkSum)}`}
+                >
+                  {ALLOCATION_LINK_LABEL[linkSum]}
+                </span>
+              </div>
             </div>
           </div>
           <button

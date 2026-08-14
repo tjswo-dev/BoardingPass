@@ -1,4 +1,5 @@
 import { type CreatorPlatform } from "@/lib/creator-link";
+import { type ContentCountryCode } from "@/lib/content-market";
 
 /** 성과 수집 출처. Apify 연동 후 live 로 바뀝니다. */
 export type ContentMetricsSource = "mock" | "apify";
@@ -9,6 +10,8 @@ export type ContentPostInsight = {
   id: string;
   url: string;
   platform: CreatorPlatform;
+  countryCode: ContentCountryCode;
+  countryLabel: string;
   allocationId: string | null;
   linkId: string | null;
   productId: string | null;

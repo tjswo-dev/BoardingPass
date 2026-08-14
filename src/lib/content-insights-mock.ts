@@ -1,4 +1,5 @@
 import { type CreatorPlatform } from "@/lib/creator-link";
+import { inferContentCountry } from "@/lib/content-market";
 import {
   aggregateContentInsights,
   type ContentPeriod,
@@ -109,10 +110,13 @@ export function buildMockContentInsights(
         4,
         Math.round(likes * (mockInt(`${seed.id}:cmt`, 4, 18) / 100)),
       );
+      const country = inferContentCountry(item.stores?.name, item.stores?.address);
       posts.push({
         id: seed.id,
         url: seed.url,
         platform: seed.platform,
+        countryCode: country.code,
+        countryLabel: country.label,
         allocationId: item.id,
         linkId: seed.linkId,
         productId: item.product_id,
